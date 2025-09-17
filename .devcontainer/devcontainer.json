@@ -1,0 +1,29 @@
+{
+  "name": "Android Dev Container",
+  // Use a standard Ubuntu image as our base.
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+  // Features to add to the container.
+  "features": {
+    // Install Java (required for Android)
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "17"
+    }
+  },
+
+  // Forward ports so we can access services running in the container.
+  "forwardPorts": [
+    6080, // noVNC web client (to see the emulator)
+    5901, // VNC server
+    5037  // ADB server
+  ],
+  "portsAttributes": {
+    "6080": {
+      "label": "Emulator View",
+      "onAutoForward": "openBrowser"
+    }
+  },
+
+  // This is where the magic happens! These commands run after the container is created.
+  "postCreateCommand": "bash ./.devcontainer/post-create.sh"
+}
